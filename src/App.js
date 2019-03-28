@@ -8,16 +8,33 @@ const MAX_TEMPERATURE = 40;
 const MIN_HEART = 80;
 const MAX_HEART = 180;
 const MIN_STEPS = 0;
-const MAX_STEPS = 50000;
+const MAX_STEPS = 50000; 
+
 class App extends React.Component{
   constructor(props){
     super(props);
+  this.calculateWater=this.calculateWater.bind(this)
+    console.log(props)
     this.state={
       water : 0,
       heart : 120,
       temperature : -10,
       steps : 3000
     }
+  }
+  calculateWater(temperature,steps,heart){
+    let formul=1.5
+    if(temperature>20){
+      formul=0.02*(temperature-20)+formul
+    }
+    if( steps>10000){
+      formul=0.00002*(steps-10000)+formul
+    }
+    if(heart>120){
+      formul=0.0008*(heart-120)+formul
+    }
+    console.log(formul,steps-120)
+     return formul.toFixed(2)
   }
   onChangeHeart=(value)=>{
     console.log('App#onChangeHeartRate value', value);
@@ -39,21 +56,30 @@ class App extends React.Component{
     })
   }
 
-  onClickPlus=()=>{
+  onClickPlus=(value)=>{
+    console.log('App#onChangeSteps value plus', value);
+
     this.setState({
-      steps:this.state.steps+1000,
+      steps:value+1000
     })
   }
-  onClickMoins=()=>{
+  onClickMoins=(value)=>{ 
+    console.log('App#onChangeSteps value moins', value);
+    if(value>0){
     this.setState({
-      steps:this.state.steps-1000,
-    })
+      steps:value-1000,
+    })}
   }
   render(){
     return(
       <div className="container-fluid">
         <div className="row">
-          <Water/>
+          <Water 
+          
+            water={this.calculateWater(this.state.temperature,this.state.steps, this.state.heart)}
+            
+          />
+
           <Person 
             steps={this.state.steps} 
             onChangeFn={this.onChangeSteps}
@@ -61,8 +87,7 @@ class App extends React.Component{
             onClickMoins={this.onClickMoins}
             stepsMax={MAX_STEPS}
             stepsMin={MIN_STEPS}
-            stepsPasPlus={this.state.steps+1000}
-            stepsPasMoins={this.state.steps-1000}
+         
           />
           <HeartRate
             heart={this.state.heart} 
@@ -83,3 +108,16 @@ class App extends React.Component{
 }
 
 export default App;
+// Promise.all(["https://restcountries.eu/rest/v2/name/france", "https://restcountries.eu/rest/v2/name/italy"].map((url)=>{
+//     return fetch(url)
+//         .then(res => res.json())
+//         .then(data => {let capital=data[0].capital; let name=data[0].name; return capital+" "+name  } )
+// })).then((capitals,names) => {
+//     console.log(capitals,names);
+// })
+
+// fetch("https://restcountries.eu/rest/v2/name/france")
+//   .then((res)=>res.json())
+//   .then((data)=>console.log(data[0].capital,data[0].name))
+
+// urls=["https://restcountries.eu/rest/v2/name/france", "https://restcountries.eu/rest/v2/name/italy"]

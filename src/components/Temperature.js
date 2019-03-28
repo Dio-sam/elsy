@@ -1,7 +1,6 @@
 import React from "react";
 import Icon from "./core/Icon";
-import Slider from "rc-slider";
-import 'rc-slider/assets/index.css';
+import RCSlider from "./core/RCSlider";
 class Temperature extends React.Component{
   render(){
     return(
@@ -10,8 +9,16 @@ class Temperature extends React.Component{
           name="wb_sunny"
           color="yellow"
         />
-        <p>{this.props.temperature} C</p>
-        <Slider min={this.props.temperatureMin} max={this.props.temperatureMax} onChange={(val)=>{this.props.onChangeFn(val)}}/>
+      
+        <div>
+          <RCSlider  
+            value={this.props.temperature} 
+            min={this.props.temperatureMin} 
+            max={this.props.temperatureMax}
+            onChange={this.props.onChangeFn} 
+            />
+          <p>{this.props.temperature} C</p>
+        </div>
       </div>
       
     );

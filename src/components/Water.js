@@ -9,6 +9,7 @@ class Water extends React.Component{
           name="local_drink"
           color="#3A85FF"
         />
+       <p>{this.props.water}</p>
        
       </div>
     );

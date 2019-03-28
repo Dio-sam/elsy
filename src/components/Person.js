@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "./core/Icon";
-import Slider from "rc-slider";
-import 'rc-slider/assets/index.css';
+
+import RCSlider from "./core/RCSlider";
 
 class Person extends React.Component{
 
@@ -29,18 +29,23 @@ class Person extends React.Component{
           name="directions_walk"
           color={this.state.isClicked ? "blue" : "pink"}
         />
-            <button onClick={()=>{this.props.onClickPlus()}}>
+            <button onClick={()=>{this.props.onClickPlus(this.props.steps)}}>
                 +
             </button>
         
-            <button onClick={()=>{this.props.onClickMoins() }}>
+            <button onClick={()=>{this.props.onClickMoins(this.props.steps) }}>
                 -
             </button>
-        <Slider min={this.props.stepsPasMin } max={this.props.stepsMax} onChange={(val)=>{this.props.onChangeFn(val)}}/>
-      
-        
+            
+
+        <RCSlider  
+          value={this.props.steps} 
+          min={this.props.stepsMin} 
+          max={this.props.stepsMax}
+          onChange={this.props.onChangeFn} 
+        />
         <p>{this.props.steps} Steps</p>
-      </div>
+      </div> 
     );
   }
 }
