@@ -108,16 +108,3 @@ class App extends React.Component{
 }
 
 export default App;
-// Promise.all(["https://restcountries.eu/rest/v2/name/france", "https://restcountries.eu/rest/v2/name/italy"].map((url)=>{
-//     return fetch(url)
-//         .then(res => res.json())
-//         .then(data => {let capital=data[0].capital; let name=data[0].name; return capital+" "+name  } )
-// })).then((capitals,names) => {
-//     console.log(capitals,names);
-// })
-
-// fetch("https://restcountries.eu/rest/v2/name/france")
-//   .then((res)=>res.json())
-//   .then((data)=>console.log(data[0].capital,data[0].name))
-
-// urls=["https://restcountries.eu/rest/v2/name/france", "https://restcountries.eu/rest/v2/name/italy"]
